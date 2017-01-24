@@ -6,9 +6,10 @@ import java.util.stream.Collector;
 import java.util.stream.Stream;
 
 /**
- * Read 5 minute tick stock data from http://stooq.com/db/h/.
+ * Read 5 minute tick stock data from http://stooq.com/db/d/?b=5_us_txt
  * assumed at this point to be data for a 5 minute period
- * Currently hardcoded to read a specific downloaded file.
+ * Currently hard coded to read specific downloaded data.
+ *
  * This is just a playground project for practicing Java Lambda language features.
  *
  *  @author Karl Nicholas

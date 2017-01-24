@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-// -------------------------------------------------------------------------
 /**
  *  Write a one-sentence summary of your class here.
  *  Follow it with additional details about its purpose, what abstraction
@@ -19,7 +18,6 @@ public class LocalDateStockData implements Comparable<LocalDate> {
     private List<StockData> stockData;
     private StockDataStats stockDataStats;
     private StockData localDateStockData;
-    // ----------------------------------------------------------
     /**
      * Create a new LocalDateStockData object.
      * @param stockData first StockData datea point to add
@@ -30,7 +28,6 @@ public class LocalDateStockData implements Comparable<LocalDate> {
         stockDataStats = new StockDataStats();
         this.add(stockData);
     }
-    // ----------------------------------------------------------
     /**
      * Return localDate of this set of StockData
      * @return localDate of this set of StockData

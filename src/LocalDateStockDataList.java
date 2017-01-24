@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
-// -------------------------------------------------------------------------
 /**
  *  Write a one-sentence summary of your class here.
  *  Follow it with additional details about its purpose, what abstraction
@@ -16,14 +15,12 @@ import java.util.stream.Stream;
  */
 public class LocalDateStockDataList {
     private List<LocalDateStockData> localDateStockDataList;
-    // ----------------------------------------------------------
     /**
      * Create a new LocalDateStockDataList object.
      */
     public LocalDateStockDataList() {
         localDateStockDataList = new ArrayList<LocalDateStockData>();
     }
-    // ----------------------------------------------------------
     /**
      * implementation for Collector accumulator requirement
      * @param stockData StockData to add
@@ -40,7 +37,6 @@ public class LocalDateStockDataList {
             localDateStockData.add(stockData);
         }
     }
-    // ----------------------------------------------------------
     /**
      * implementation for Collector combine requirement
      * @param otherMap other LocalDateStockDataList to merge
@@ -57,7 +53,6 @@ public class LocalDateStockDataList {
     public String toString() {
         return localDateStockDataList.toString();
     }
-    // ----------------------------------------------------------
     /**
      * Stream LocalDateStockData from internal data.
      * @return Stream of LocalDateStockData
@@ -66,7 +61,6 @@ public class LocalDateStockDataList {
     {
         return localDateStockDataList.stream();
     }
-    // ----------------------------------------------------------
     /**
      * Place a description of your method here.
      * @return true if sorted

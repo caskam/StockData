@@ -24,7 +24,6 @@ public class StockData {
 	private BigDecimal		close;
 	private Long			volume;
 	private Long			openInt;
-	// ----------------------------------------------------------
 	/**
 	 * Create an immutable StockData object.
 	 * @param line String from 5 min stooq market data
@@ -45,7 +44,6 @@ public class StockData {
 		this.volume = new Long(tokens[6]);
 		this.openInt = new Long(tokens[7]);
 	}
-	// ----------------------------------------------------------
 	/**
 	 * Return ZonedDateTime
 	 * @return ZonedDateTime
@@ -53,7 +51,6 @@ public class StockData {
 	public ZonedDateTime getOpenDateTime() {
 		return openDateTime;
 	}
-	// ----------------------------------------------------------
 	/**
 	 * return open price
 	 * @return open price
@@ -61,7 +58,6 @@ public class StockData {
 	public BigDecimal getOpen() {
 		return open;
 	}
-	// ----------------------------------------------------------
 	/**
 	 * return high price of this period
 	 * @return high price of this period
@@ -69,7 +65,6 @@ public class StockData {
 	public BigDecimal getHigh() {
 		return high;
 	}
-	// ----------------------------------------------------------
 	/**
 	 * return low price of this period
 	 * @return low price of this period
@@ -77,7 +72,6 @@ public class StockData {
 	public BigDecimal getLow() {
 		return low;
 	}
-	// ----------------------------------------------------------
 	/**
 	 * Place a description of your method here.
 	 * @return closing price of this tick
@@ -85,8 +79,6 @@ public class StockData {
 	public BigDecimal getClose() {
 		return close;
 	}
-	// ----------------------------------------------------------
-	// ----------------------------------------------------------
 	/**
 	 * return volume of shares traded
 	 * @return volume of shares traded
@@ -94,7 +86,6 @@ public class StockData {
 	public Long getVolume() {
 		return volume;
 	}
-	// ----------------------------------------------------------
 	/**
 	 * return open interest
 	 * @return open interest
@@ -102,7 +93,6 @@ public class StockData {
 	public Long getOpenInt() {
 		return openInt;
 	}
-	// ----------------------------------------------------------
 	/**
 	 * reduce stockData
 	 * @param stockData

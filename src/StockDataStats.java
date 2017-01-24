@@ -27,7 +27,6 @@ public class StockDataStats
     private LongSummaryStatistics openIntStats;
 
     //~ Constructors ..........................................................
-    // ----------------------------------------------------------
     /**
      * Create a new StockDataStats object.
      */
@@ -41,7 +40,6 @@ public class StockDataStats
     }
 
     //~Public  Methods ........................................................
-    // ----------------------------------------------------------
     /**
      * Add a new StockData point to computations
      * @param stockData to add
@@ -54,7 +52,6 @@ public class StockDataStats
         volumeStats.accept(stockData.getVolume().longValue());
         openIntStats.accept(stockData.getOpenInt().longValue());
     }
-    // ----------------------------------------------------------
     /**
      * Place a description of your method here.
      * @param stockDataStats to merge
@@ -69,7 +66,6 @@ public class StockDataStats
         openIntStats.combine(stockDataStats.getOpenIntStats());
         return this;
     }
-    // ----------------------------------------------------------
     /**
      * Return StockData::getOpen statistics.
      * @return StockData::getOpen
@@ -78,7 +74,6 @@ public class StockDataStats
     {
         return openStats;
     }
-    // ----------------------------------------------------------
     /**
      * Return StockData::getClose statistics.
      * @return StockData::getClose statistics.
@@ -87,7 +82,6 @@ public class StockDataStats
     {
         return closeStats;
     }
-    // ----------------------------------------------------------
     /**
      * return IntSummaryStatistics of StockData::getHigh
      * @return IntSummaryStatistics of StockData::getHigh
@@ -96,7 +90,6 @@ public class StockDataStats
     {
         return highStats;
     }
-    // ----------------------------------------------------------
     /**
      * return IntSummaryStatistics of StockData::getLow
      * @return IntSummaryStatistics of StockData::getLow
@@ -105,7 +98,6 @@ public class StockDataStats
     {
         return lowStats;
     }
-    // ----------------------------------------------------------
     /**
      * return LongSummaryStatistics of StockData::getVolume
      * @return LongSummaryStatistics of StockData::getVolume
@@ -114,7 +106,6 @@ public class StockDataStats
     {
         return volumeStats;
     }
-    // ----------------------------------------------------------
     /**
      * LongSummaryStatistics of StockData::getOpenInt
      * @return LongSummaryStatistics of StockData::getOpenInt
