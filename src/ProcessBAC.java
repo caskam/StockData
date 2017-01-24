@@ -6,9 +6,10 @@ import java.util.stream.Collector;
 import java.util.stream.Stream;
 
 /**
- *  Write a one-sentence summary of your class here.
- *  Follow it with additional details about its purpose, what abstraction
- *  it represents, and how to use it.
+ * Read 5 minute tick stock data from http://stooq.com/db/h/.
+ * assumed at this point to be data for a 5 minute period
+ * Currently hardcoded to read a specific downloaded file.
+ * This is just a playground project for practicing Java Lambda language features.
  *
  *  @author Karl Nicholas
  *  @version Jan 19, 2017
