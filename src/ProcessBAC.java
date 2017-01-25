@@ -48,8 +48,6 @@ public class ProcessBAC {
         localDateStockDataList.streamLocalDateStockData()
             .forEach((localDateStockData)->System.out.println(localDateStockData.getLocalDateStockData()));
 
-//        localDateStockDataList.streamLocalDateStockDataList().map(LocalDateStockData::getStockDataStats).forEach(System.out::println);
-
     }
 
 }

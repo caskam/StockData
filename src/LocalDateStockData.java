@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 public class LocalDateStockData implements Comparable<LocalDate> {
     private LocalDate localDate;
     private List<StockData> stockData;
-    private StockDataStats stockDataStats;
+//    private StockDataStats stockDataStats;
     private StockData localDateStockData;
     /**
      * Create a new LocalDateStockData object.
@@ -25,8 +25,8 @@ public class LocalDateStockData implements Comparable<LocalDate> {
     public LocalDateStockData(StockData stockData) {
         localDate = stockData.getOpenDateTime().toLocalDate();
         this.stockData = new ArrayList<StockData>();
-        stockDataStats = new StockDataStats();
-        this.add(stockData);
+        this.stockData.add(stockData);
+        localDateStockData = stockData;
     }
     /**
      * Return localDate of this set of StockData
@@ -54,16 +54,16 @@ public class LocalDateStockData implements Comparable<LocalDate> {
      */
     public void add(StockData newStockData) {
         stockData.add(newStockData);
-        stockDataStats.add(newStockData);
+        localDateStockData.reduce(newStockData);
     }
     // ----------------------------------------------------------
     /**
      * Get the current value of stockDataStats.
      * @return The value of stockDataStats for this object.
      */
-    public StockDataStats getStockDataStats()
+    public StockData getLocalDateStockData()
     {
-        return stockDataStats;
+        return localDateStockData;
     }
     // ----------------------------------------------------------
     /**
@@ -91,27 +91,5 @@ public class LocalDateStockData implements Comparable<LocalDate> {
      */
     public Stream<StockData> streamStockData() {
         return stockData.stream();
-    }
-    // ----------------------------------------------------------
-    /**
-     * Get the current value of localDateStockData.
-     * @return The value of localDateStockData for this object.
-     */
-    public StockData getLocalDateStockData()
-    {
-        if ( localDateStockData == null )
-            reduce();
-        return localDateStockData;
-    }
-    // ----------------------------------------------------------
-    /**
-     * Reduce the days tick data to a single StockData description
-     */
-    private void reduce() {
-        localDateStockData = stockData.stream()
-            .reduce(StockData::reduce)
-            .orElseThrow(
-                ()->new IllegalStateException("No stockData for localDate " + (localDate!=null?localDate:"unknown"))
-            );
     }
 }
