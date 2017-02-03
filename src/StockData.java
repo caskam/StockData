@@ -1,6 +1,7 @@
 
 import java.math.BigDecimal;
 import java.time.Duration;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.TemporalAmount;
 import java.util.regex.Pattern;
@@ -15,6 +16,7 @@ public class StockData {
 	private static final String warsawTimezone = "+01:00[Europe/Warsaw]";
 	private static final StringBuilder sb = new StringBuilder();
 	private static final TemporalAmount fiveMinutes = Duration.ofMinutes(5);
+	private static final ZoneId usEastern = ZoneId.of("US/Eastern");
 
 	private ZonedDateTime	openDateTime;
     private ZonedDateTime   closeDateTime;
@@ -35,6 +37,7 @@ public class StockData {
 		openDateTime = ZonedDateTime.parse(
 			sb.append(tokens[0]).append('T').append(tokens[1]).append(warsawTimezone).toString()
 		);
+		openDateTime = ZonedDateTime.ofInstant(openDateTime.toInstant(), usEastern);
         closeDateTime = openDateTime.plus(fiveMinutes);
 		// Create a DecimalFormat that fits your requirements
 		this.open = new BigDecimal(tokens[2]);

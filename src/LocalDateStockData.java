@@ -20,13 +20,9 @@ public class LocalDateStockData implements Comparable<LocalDate> {
     private StockData localDateStockData;
     /**
      * Create a new LocalDateStockData object.
-     * @param stockData first StockData datea point to add
      */
-    public LocalDateStockData(StockData stockData) {
-        localDate = stockData.getOpenDateTime().toLocalDate();
-        this.stockData = new ArrayList<StockData>();
-        this.stockData.add(stockData);
-        localDateStockData = stockData;
+    public LocalDateStockData() {
+        this.stockData = new ArrayList<>();
     }
     /**
      * Return localDate of this set of StockData
@@ -53,6 +49,10 @@ public class LocalDateStockData implements Comparable<LocalDate> {
      * @param newStockData StockData data point
      */
     public void add(StockData newStockData) {
+        if ( localDateStockData == null ||  localDate == null ) {
+            localDate = newStockData.getOpenDateTime().toLocalDate();
+            localDateStockData = newStockData;
+        }
         stockData.add(newStockData);
         localDateStockData.reduce(newStockData);
     }

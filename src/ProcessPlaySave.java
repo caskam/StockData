@@ -15,16 +15,16 @@ import java.util.stream.Stream;
  *  @author Karl Nicholas
  *  @version Jan 19, 2017
  */
-public class ProcessBAC {
+public class ProcessPlaySave {
     /**
      * main method for running application
      * @param args command line strings -- ignored
      */
     public static void main(String[] args) {
-        new ProcessBAC().run();
+        new ProcessPlaySave().run();
     }
     private void run() {
-
+/*
         LocalDateStockDataList localDateStockDataList;
 
         try ( Stream<String> lines = Files.lines(Paths.get("C:/Users/quix0/Downloads/5_us_txt/data/5 min/us/nyse stocks/1/bac.us.txt")) ) {
@@ -47,7 +47,7 @@ public class ProcessBAC {
         // print out reduced data
         localDateStockDataList.streamLocalDateStockData()
             .forEach((localDateStockData)->System.out.println(localDateStockData.getLocalDateStockData()));
-
+*/
     }
 
 }

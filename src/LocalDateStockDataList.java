@@ -13,8 +13,10 @@ import java.util.stream.Stream;
  *  @author Karl Nicholas
  *  @version Jan 19, 2017
  */
-public class LocalDateStockDataList {
+public class LocalDateStockDataList implements StockSymbolHolder {
+    private String stockSymbol;
     private List<LocalDateStockData> localDateStockDataList;
+
     /**
      * Create a new LocalDateStockDataList object.
      */
@@ -30,12 +32,12 @@ public class LocalDateStockDataList {
         int index = Collections.binarySearch(localDateStockDataList, localDate );
         LocalDateStockData localDateStockData;
         if ( index < 0 ) {
-            localDateStockData = new LocalDateStockData(stockData);
+            localDateStockData = new LocalDateStockData();
             localDateStockDataList.add((0-index)-1, localDateStockData);
         } else {
             localDateStockData = localDateStockDataList.get(index);
-            localDateStockData.add(stockData);
         }
+        localDateStockData.add(stockData);
     }
     /**
      * implementation for Collector combine requirement
@@ -49,6 +51,7 @@ public class LocalDateStockDataList {
         });
         return this;
     }
+
     @Override
     public String toString() {
         return localDateStockDataList.toString();
@@ -82,5 +85,21 @@ public class LocalDateStockDataList {
             }
         }
         return sorted;
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getStockSymbol()
+    {
+        return stockSymbol;
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setStockSymbol(String stockSymbol)
+    {
+        this.stockSymbol = stockSymbol;
     }
 }
