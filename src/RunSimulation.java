@@ -2,7 +2,6 @@
 import java.util.stream.Collector;
 import java.util.stream.Stream;
 import static java.util.stream.Collectors.*;
-import java.util.List;
 import java.util.Map;
 import static java.util.function.Function.*;
 
@@ -21,6 +20,10 @@ public class RunSimulation
     //~ Constructors ..........................................................
 
     //~Public  Methods ........................................................
+    /**
+     * Place a description of your method here.
+     * @param args
+     */
     public static void main(String[] args) {
         new RunSimulation().run();
     }
@@ -46,9 +49,7 @@ public class RunSimulation
 
         mapStocks.forEach( (k, v)->System.out.println(k + " = " + v));
 
-
     }
-
 
 
 }

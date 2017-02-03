@@ -13,7 +13,7 @@ import java.util.stream.Stream;
  *  @author Karl Nicholas
  *  @version Jan 19, 2017
  */
-public class LocalDateStockDataList implements StockSymbolHolder {
+public class LocalDateStockDataList implements StockSymbolProcessor {
     private String stockSymbol;
     private List<LocalDateStockData> localDateStockDataList;
 
@@ -101,5 +101,13 @@ public class LocalDateStockDataList implements StockSymbolHolder {
     public void setStockSymbol(String stockSymbol)
     {
         this.stockSymbol = stockSymbol;
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String returnResults()
+    {
+        return localDateStockDataList.toString();
     }
 }

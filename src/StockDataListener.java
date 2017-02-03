@@ -1,3 +1,4 @@
+import java.util.EventListener;
 
 /**
  *  Write a one-sentence summary of your class here.
@@ -7,21 +8,11 @@
  *  @author Karl Nicholas
  *  @version Feb 2, 2017
  */
-public class StockDataListener
+public interface StockDataListener extends StockSymbolProcessor
 {
     /**
      * Place a description of your method here.
      * @param stockData
      */
-    public void onOpen(StockData stockData) {}
-    /**
-     * Place a description of your method here.
-     * @param stockData
-     */
-    public void onClose(StockData stockData) {}
-    /**
-     * Place a description of your method here.
-     * @param stockData
-     */
-    public void onTick(StockData stockData) {}
+    public void onTick(StockData stockData);
 }

@@ -6,7 +6,7 @@
  *  @author quix0
  *  @version Feb 2, 2017
  */
-public interface StockSymbolHolder
+public interface StockSymbolProcessor
 {
     /**
      * Place a description of your method here.
@@ -18,4 +18,9 @@ public interface StockSymbolHolder
      * @param stockSymbol
      */
     public void setStockSymbol(String stockSymbol);
+    /**
+     * Place a description of your method here.
+     * @return
+     */
+    public String returnResults();
 }
