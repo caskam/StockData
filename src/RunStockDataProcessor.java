@@ -16,7 +16,7 @@ public class RunStockDataProcessor
 {
     /**
      * Place a description of your method here.
-     * @param args
+     * @param args not used
      */
     public static void main(String[] args) {
         new RunStockDataProcessor().run();
@@ -25,7 +25,8 @@ public class RunStockDataProcessor
 
         Map<String, StockDataProcessorInterface> r2 =  Stream.of("bac", "ge", "dis", "ibm", "jnj", "bud")
         .parallel()
-        .map(LocalDateStockDataList::new)
+//        .map(LocalDateStockDataList::new)
+        .map(LocalDateStatistics::new)
         .map(StockDataSource::new)
         .map(StockDataSource::process)
         .collect(toMap(p->p.getStockSymbol(), identity()));

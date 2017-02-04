@@ -3,7 +3,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  *  Write a one-sentence summary of your class here.
@@ -19,17 +18,18 @@ public class LocalDateStockDataList implements StockDataProcessorInterface {
 
     /**
      * Create a new LocalDateStockDataList object.
-     * @param stockSymbol
+     * @param stockSymbol found on exchange
      */
     public LocalDateStockDataList(String stockSymbol) {
         this.stockSymbol = stockSymbol;
         localDateStockDataList = new ArrayList<LocalDateStockData>();
     }
     /**
-     * implementation for Collector accumulator requirement
-     * @param stockData StockData to add
+     * {@inheritDoc}
      */
-    public void onTick(StockData stockData) {
+    @Override
+    public void accept(StockData stockData)
+    {
         LocalDate localDate = stockData.getOpenDateTime().toLocalDate();
         int index = Collections.binarySearch(localDateStockDataList, localDate );
         LocalDateStockData localDateStockData;
@@ -42,18 +42,6 @@ public class LocalDateStockDataList implements StockDataProcessorInterface {
         localDateStockData.add(stockData);
     }
 
-    @Override
-    public String toString() {
-        return localDateStockDataList.toString();
-    }
-    /**
-     * Stream LocalDateStockData from internal data.
-     * @return Stream of LocalDateStockData
-     */
-    public Stream<LocalDateStockData> streamLocalDateStockData()
-    {
-        return localDateStockDataList.stream();
-    }
     /**
      * Place a description of your method here.
      * @return true if sorted

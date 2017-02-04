@@ -3,7 +3,6 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  *  Write a one-sentence summary of your class here.
@@ -82,13 +81,5 @@ public class LocalDateStockData implements Comparable<LocalDate> {
             }
         }
         return sorted;
-    }
-    // ----------------------------------------------------------
-    /**
-     * Return a Stream<StockData>;
-     * @return Stream<StockData> streamStockData
-     */
-    public Stream<StockData> streamStockData() {
-        return stockData.stream();
     }
 }

@@ -1,3 +1,5 @@
+import java.util.function.Consumer;
+
 /**
  *  Write a one-sentence summary of your class here.
  *  Follow it with additional details about its purpose, what abstraction
@@ -6,8 +8,7 @@
  *  @author quix0
  *  @version Feb 2, 2017
  */
-public interface StockDataProcessorInterface
-{
+public interface StockDataProcessorInterface extends Consumer<StockData> {
     /**
      * Place a description of your method here.
      * @return StockSymbol
@@ -15,9 +16,9 @@ public interface StockDataProcessorInterface
     public String getStockSymbol();
     /**
      * Place a description of your method here.
-     * @param stockData
+     * @param stockData parsed data tick
      */
-    public void onTick(StockData stockData);
+    void accept(StockData stockData);
     /**
      * Place a description of your method here.
      * @return results

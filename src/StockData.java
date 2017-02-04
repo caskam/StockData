@@ -97,7 +97,7 @@ public class StockData {
 	}
 	/**
 	 * reduce stockData
-	 * @param stockData
+	 * @param stockData found on exchange
 	 * @return StockData this
 	 */
 	public StockData reduce(StockData stockData) {

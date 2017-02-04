@@ -13,9 +13,8 @@ import java.util.stream.Stream;
  *
  * @author Karl Nicholas
  * @version Jan 19, 2017
- * @param <Processor>
  */
-public class StockDataSource<Processor extends StockDataProcessorInterface> {
+public class StockDataSource {
     private static final String sourceDirectory = "C:/Users/quix0/Downloads/5_us_txt/data/5 min/us/";
     private static final String[] nyseSourceExchanges = {"nyse stocks/1/"};
     private static final String datafileExtension = ".us.txt";
@@ -23,10 +22,10 @@ public class StockDataSource<Processor extends StockDataProcessorInterface> {
 
     /**
      * Create a new ProcessStock object.
-     * @param listener
+     * @param processor StockDataProcessorInterface processor
      */
-    public StockDataSource(StockDataProcessorInterface listener) {
-        this.processor = listener;
+    public StockDataSource(StockDataProcessorInterface processor) {
+        this.processor = processor;
     }
     /**
      * Place a description of your method here.
@@ -62,7 +61,7 @@ public class StockDataSource<Processor extends StockDataProcessorInterface> {
             lines
             .skip(1)
             .map(StockData::new)
-            .forEachOrdered(sd->processor.onTick(sd));
+            .forEachOrdered(processor);
             return processor;
         } catch (IOException e) {
             throw new RuntimeException(e);
