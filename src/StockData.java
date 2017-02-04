@@ -7,8 +7,10 @@ import java.time.temporal.TemporalAmount;
 import java.util.regex.Pattern;
 
 /**
- * immutable StockData object from stooq market data download
- * assumed at this point to be data for a 5 minute period
+ * Immutable StockData object from stooq market data download
+ *
+ * @author Karl Nicholas
+ * @version 2017-02-04
  *
  */
 public class StockData {
@@ -48,7 +50,7 @@ public class StockData {
 	}
 	/**
 	 * Return ZonedDateTime
-	 * @return ZonedDateTime
+	 * @return {@link ZonedDateTime}
 	 */
 	public ZonedDateTime getOpenDateTime() {
 		return openDateTime;
@@ -96,9 +98,9 @@ public class StockData {
 		return openInt;
 	}
 	/**
-	 * reduce stockData
-	 * @param stockData found on exchange
-	 * @return StockData this
+	 * reduce stockData by finding the lowest low, highest high, sum of volumes, etc.
+	 * @param stockData {@link StockData}
+	 * @return {@link StockData} reduced results
 	 */
 	public StockData reduce(StockData stockData) {
 	    // set open and close to earliest and latest values
@@ -126,7 +128,10 @@ public class StockData {
 	}
 	@Override
 	/**
-	 * Suggested that this produce a string that the constructor can parse
+	 * Produces a string in the same format as the input string,
+	 * but in US/Eastern time zone, therefore exported strings
+	 * cannot be re-imported back into the constructor.
+	 *
 	 * e.g.:
 	 *  Date,Time,Open,High,Low,Close,Volume,OpenInt
 	 *  2016-12-27,15:35:00,22.71,22.735,22.605,22.665,2648082,0

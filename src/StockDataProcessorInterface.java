@@ -1,12 +1,12 @@
 import java.util.function.Consumer;
 
 /**
- *  Write a one-sentence summary of your class here.
- *  Follow it with additional details about its purpose, what abstraction
- *  it represents, and how to use it.
+ *  A StockDatea processor is a {@link Consumer} of {@link StockData}.
  *
- *  @author quix0
- *  @version Feb 2, 2017
+ *  A processor must also implement a getter for a String getter for the Stock Symbol.
+ *
+ *  @author Karl Nicholas
+ *  @version 2017-02-01
  */
 public interface StockDataProcessorInterface extends Consumer<StockData> {
     /**
@@ -14,11 +14,6 @@ public interface StockDataProcessorInterface extends Consumer<StockData> {
      * @return StockSymbol
      */
     public String getStockSymbol();
-    /**
-     * Place a description of your method here.
-     * @param stockData parsed data tick
-     */
-    void accept(StockData stockData);
     /**
      * Place a description of your method here.
      * @return results
