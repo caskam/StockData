@@ -2,7 +2,6 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.function.Function;
 import java.util.stream.Stream;
 
 /**
@@ -14,28 +13,26 @@ import java.util.stream.Stream;
  *
  * @author Karl Nicholas
  * @version Jan 19, 2017
- * @param <Listener>
+ * @param <Processor>
  */
-public class StockDataEventSource<Listener extends StockSymbolListener> {
+public class StockDataSource<Processor extends StockDataProcessorInterface> {
     private static final String sourceDirectory = "C:/Users/quix0/Downloads/5_us_txt/data/5 min/us/";
     private static final String[] nyseSourceExchanges = {"nyse stocks/1/"};
     private static final String datafileExtension = ".us.txt";
-    private String stockSymbol;
-    private StockDataEventListener listener;
+    private StockDataProcessorInterface processor;
 
     /**
      * Create a new ProcessStock object.
      * @param listener
      */
-    public StockDataEventSource(StockDataEventListener listener) {
-        this.listener = listener;
-        this.stockSymbol = listener.getStockSymbol();
+    public StockDataSource(StockDataProcessorInterface listener) {
+        this.processor = listener;
     }
     /**
      * Place a description of your method here.
      * @return StockDataListener listener
      */
-    public StockSymbolProcessor process()
+    public StockDataProcessorInterface process()
 //    public Listener apply(Listener listener)
     {
 //        StockDataListener listener = new listenerImpl();
@@ -54,12 +51,19 @@ public class StockDataEventSource<Listener extends StockSymbolListener> {
                 break;
         }
 
-        try ( Stream<String> lines = Files.lines(Paths.get(sourceDirectory + exchanges[0] + stockSymbol.toLowerCase() + datafileExtension)) ) {
+        try ( Stream<String> lines = Files.lines(
+            Paths.get(
+                sourceDirectory
+                + exchanges[0]
+                + processor.getStockSymbol().toLowerCase()
+                + datafileExtension)
+            )
+        ) {
             lines
             .skip(1)
             .map(StockData::new)
-            .forEachOrdered(sd->listener.onTick(sd));
-            return listener;
+            .forEachOrdered(sd->processor.onTick(sd));
+            return processor;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

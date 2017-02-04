@@ -6,7 +6,7 @@
  *  @author quix0
  *  @version Feb 2, 2017
  */
-public interface StockSymbolProcessor
+public interface StockDataProcessorInterface
 {
     /**
      * Place a description of your method here.
@@ -15,12 +15,12 @@ public interface StockSymbolProcessor
     public String getStockSymbol();
     /**
      * Place a description of your method here.
-     * @param stockSymbol
+     * @param stockData
      */
-    public void setStockSymbol(String stockSymbol);
+    public void onTick(StockData stockData);
     /**
      * Place a description of your method here.
-     * @return
+     * @return results
      */
     public String returnResults();
 }

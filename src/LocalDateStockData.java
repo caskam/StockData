@@ -16,7 +16,6 @@ import java.util.stream.Stream;
 public class LocalDateStockData implements Comparable<LocalDate> {
     private LocalDate localDate;
     private List<StockData> stockData;
-//    private StockDataStats stockDataStats;
     private StockData localDateStockData;
     /**
      * Create a new LocalDateStockData object.

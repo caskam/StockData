@@ -13,21 +13,23 @@ import java.util.stream.Stream;
  *  @author Karl Nicholas
  *  @version Jan 19, 2017
  */
-public class LocalDateStockDataList implements StockSymbolProcessor {
+public class LocalDateStockDataList implements StockDataProcessorInterface {
     private String stockSymbol;
     private List<LocalDateStockData> localDateStockDataList;
 
     /**
      * Create a new LocalDateStockDataList object.
+     * @param stockSymbol
      */
-    public LocalDateStockDataList() {
+    public LocalDateStockDataList(String stockSymbol) {
+        this.stockSymbol = stockSymbol;
         localDateStockDataList = new ArrayList<LocalDateStockData>();
     }
     /**
      * implementation for Collector accumulator requirement
      * @param stockData StockData to add
      */
-    public void add(StockData stockData) {
+    public void onTick(StockData stockData) {
         LocalDate localDate = stockData.getOpenDateTime().toLocalDate();
         int index = Collections.binarySearch(localDateStockDataList, localDate );
         LocalDateStockData localDateStockData;
@@ -38,18 +40,6 @@ public class LocalDateStockDataList implements StockSymbolProcessor {
             localDateStockData = localDateStockDataList.get(index);
         }
         localDateStockData.add(stockData);
-    }
-    /**
-     * implementation for Collector combine requirement
-     * @param otherMap other LocalDateStockDataList to merge
-     * @return this
-     */
-    public LocalDateStockDataList merge(LocalDateStockDataList otherMap) {
-        otherMap.localDateStockDataList.stream().forEach(localDateStockData->{
-            int index = Collections.binarySearch(localDateStockDataList, localDateStockData.getLocalDate() );
-            localDateStockDataList.add((0-index)-1, localDateStockData);
-        });
-        return this;
     }
 
     @Override
@@ -93,14 +83,6 @@ public class LocalDateStockDataList implements StockSymbolProcessor {
     public String getStockSymbol()
     {
         return stockSymbol;
-    }
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setStockSymbol(String stockSymbol)
-    {
-        this.stockSymbol = stockSymbol;
     }
     /**
      * {@inheritDoc}
