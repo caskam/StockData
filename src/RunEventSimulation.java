@@ -1,5 +1,4 @@
 
-import java.util.stream.Collector;
 import java.util.stream.Stream;
 import static java.util.stream.Collectors.*;
 import java.util.List;
@@ -33,64 +32,47 @@ public class RunEventSimulation
                 LocalDateStockDataList::add,
                 LocalDateStockDataList::merge) );
 */
-        class StockDataListEventListener implements StockDataListener {
-            public LocalDateStockDataList localDateStockDataList;
-            private String stockSymbol;
-            public StockDataListEventListener() {
-                localDateStockDataList = new LocalDateStockDataList();
-            }
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public void onTick(StockData stockData)
-            {
-                localDateStockDataList.add(stockData);
-            }
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public String getStockSymbol()
-            {
-                return stockSymbol;
-            }
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public void setStockSymbol(String stockSymbol)
-            {
-                this.stockSymbol = stockSymbol;
-            }
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public String returnResults()
-            {
-                return localDateStockDataList.returnResults();
-            }
-
-        }
 //        StockDataEventSource eventSource = new StockDataEventSource( new StockDataListEventListener() );
 
 
 //      Map<String, StockDataListener> listStocks =
 //      List<StockDataListener> listStocks =
 
-        Map<String, StockDataListener> mapStocks =
-        Stream.of("bac", "ge", "dis", "ibm", "jnj", "bud")
+//        Map<String, StockDataListener> mapStocks =
+/*
+        List<StockDataEventSource<StockSymbolListener>> list = Stream.of("bac", "ge", "dis", "ibm", "jnj", "bud")
+        .map(StockDataEventListener::new)
         .map(StockDataEventSource::new)
-        .map(sdes->sdes.process(new StockDataListEventListener()))
-        .collect(toMap(sdl->sdl.getStockSymbol(), identity()));
+        .collect(toList());
+
+        List<StockSymbolProcessor> r = list
+        .parallelStream()
+        .map(StockDataEventSource::process)
+        .collect(toList());
+*/
+/*
+        List<StockSymbolProcessor> r2 =  Stream.of("bac", "ge", "dis", "ibm", "jnj", "bud")
+        .map(StockDataEventListener::new)
+        .map(StockDataEventSource::new)
+        .map(StockDataEventSource::process)
+        .collect(toList());
+*/
+        Map<String, StockSymbolProcessor> r2 =  Stream.of("bac", "ge", "dis", "ibm", "jnj", "bud")
+        .parallel()
+        .map(StockDataEventListener::new)
+        .map(StockDataEventSource::new)
+        .map(StockDataEventSource::process)
+        .collect(toMap(p->p.getStockSymbol(), identity()));
+
+        r2.forEach((k,v)->System.out.println(k + " = " + v.returnResults()));
+
+//        .map();
+
+//        .collect(toMap(sdl->sdl.getStockSymbol(), identity()));
 //        .collect(toMap(sdl->sdl.getStockSymbl(), identity()));
 
-        mapStocks.forEach( (k, v)->System.out.println(k + " = " + v.returnResults()));
+
+//        mapStocks.forEach( (k, v)->System.out.println(k + " = " + v.returnResults()));
 //        listStocks.forEach(sdl->System.out.println(sdl.getStockSymbol() + " " + sdl));
 
     }

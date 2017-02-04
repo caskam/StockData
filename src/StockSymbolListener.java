@@ -1,4 +1,3 @@
-import java.util.EventListener;
 
 /**
  *  Write a one-sentence summary of your class here.
@@ -8,7 +7,7 @@ import java.util.EventListener;
  *  @author Karl Nicholas
  *  @version Feb 2, 2017
  */
-public interface StockDataListener extends StockSymbolProcessor
+public interface StockSymbolListener extends StockSymbolProcessor
 {
     /**
      * Place a description of your method here.

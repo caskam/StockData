@@ -14,9 +14,9 @@ import java.util.regex.Pattern;
 public class StockData {
 	private static final Pattern pattern = Pattern.compile(",");
 	private static final String warsawTimezone = "+01:00[Europe/Warsaw]";
-	private static final StringBuilder sb = new StringBuilder();
 	private static final TemporalAmount fiveMinutes = Duration.ofMinutes(5);
 	private static final ZoneId usEastern = ZoneId.of("US/Eastern");
+	private static final char T = 'T';
 
 	private ZonedDateTime	openDateTime;
     private ZonedDateTime   closeDateTime;
@@ -33,9 +33,8 @@ public class StockData {
 	public StockData(String line) {
 		// 2016-12-27,15:35:00,22.71,22.735,22.605,22.665,2648082,0
 		String[] tokens = pattern.split(line);
-		sb.setLength(0);
 		openDateTime = ZonedDateTime.parse(
-			sb.append(tokens[0]).append('T').append(tokens[1]).append(warsawTimezone).toString()
+		    new StringBuilder(40).append(tokens[0]).append(T).append(tokens[1]).append(warsawTimezone)
 		);
 		openDateTime = ZonedDateTime.ofInstant(openDateTime.toInstant(), usEastern);
         closeDateTime = openDateTime.plus(fiveMinutes);

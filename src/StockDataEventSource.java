@@ -2,6 +2,7 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 /**
@@ -13,28 +14,32 @@ import java.util.stream.Stream;
  *
  * @author Karl Nicholas
  * @version Jan 19, 2017
+ * @param <Listener>
  */
-public class StockDataEventSource {
+public class StockDataEventSource<Listener extends StockSymbolListener> {
     private static final String sourceDirectory = "C:/Users/quix0/Downloads/5_us_txt/data/5 min/us/";
     private static final String[] nyseSourceExchanges = {"nyse stocks/1/"};
     private static final String datafileExtension = ".us.txt";
     private String stockSymbol;
+    private StockDataEventListener listener;
 
     /**
      * Create a new ProcessStock object.
-     * @param stockSymbol
+     * @param listener
      */
-    public StockDataEventSource(String stockSymbol) {
-        this.stockSymbol = stockSymbol;
+    public StockDataEventSource(StockDataEventListener listener) {
+        this.listener = listener;
+        this.stockSymbol = listener.getStockSymbol();
     }
     /**
      * Place a description of your method here.
-     * @param listener
      * @return StockDataListener listener
      */
-    public StockDataListener process(StockDataListener listener)
+    public StockSymbolProcessor process()
+//    public Listener apply(Listener listener)
     {
-        listener.setStockSymbol(stockSymbol);
+//        StockDataListener listener = new listenerImpl();
+//        listener.setStockSymbol(stockSymbol);
         EXCHANGES exchange = EXCHANGES.NYSE;
         String[] exchanges;
         switch ( exchange ) {
@@ -50,7 +55,10 @@ public class StockDataEventSource {
         }
 
         try ( Stream<String> lines = Files.lines(Paths.get(sourceDirectory + exchanges[0] + stockSymbol.toLowerCase() + datafileExtension)) ) {
-            lines.skip(1).map(StockData::new).forEach(sd->listener.onTick(sd));
+            lines
+            .skip(1)
+            .map(StockData::new)
+            .forEachOrdered(sd->listener.onTick(sd));
             return listener;
         } catch (IOException e) {
             throw new RuntimeException(e);
