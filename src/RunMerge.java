@@ -21,9 +21,14 @@ import stockdata.StockData;
  */
 public class RunMerge
 {
+    /**
+     * directories to process
+     */
     static final String[] dirs = {
         "C:/Users/quix0/Downloads/5_us_txt/new/data/5 min/us/nyse stocks/1",
-        "C:/Users/quix0/Downloads/5_us_txt/new/data/5 min/us/nyse stocks/2"
+        "C:/Users/quix0/Downloads/5_us_txt/new/data/5 min/us/nyse stocks/2",
+        "C:/Users/quix0/Downloads/5_us_txt/new/data/5 min/us/nasdaq stocks/1",
+        "C:/Users/quix0/Downloads/5_us_txt/new/data/5 min/us/nasdaq stocks/2"
     };
     /**
      * Place a description of your method here.
@@ -36,6 +41,7 @@ public class RunMerge
         for ( String dir: dirs) {
             try ( DirectoryStream<Path> files = Files.newDirectoryStream(Paths.get(dir))) {
                 Streams.stream(files)
+                .parallel()
                 .forEach(p->{
                     Set<StockData> setStockData = new java.util.HashSet<>();
                     try ( Stream<String>lines = Files.lines(p) ) {

@@ -153,4 +153,14 @@ public class StockData implements Comparable<StockData>{
     {
         return openDateTime.compareTo(o.openDateTime);
     }
+    @Override
+    public int hashCode()
+    {
+        return openDateTime.hashCode();
+    }
+    @Override
+    public boolean equals(Object obj)
+    {
+        return openDateTime.equals(((StockData)obj).openDateTime);
+    }
 }
