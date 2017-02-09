@@ -1,8 +1,11 @@
+package processors;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import stockdata.StockData;
+import stockdata.StockDataProcessorInterface;
 
 /**
  *  Write a one-sentence summary of your class here.

@@ -1,3 +1,4 @@
+package stockdata;
 import java.util.function.Consumer;
 
 /**

@@ -1,6 +1,9 @@
+package processors;
 
 import com.google.common.math.StatsAccumulator;
 import java.time.LocalDate;
+import stockdata.StockData;
+import stockdata.StockDataProcessorInterface;
 
 /**
  *  Write a one-sentence summary of your class here.

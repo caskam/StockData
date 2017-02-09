@@ -6,6 +6,8 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import processors.LocalDateStatistics;
+import stockdata.StockDataSource;
 
 /**
  *  Write a one-sentence summary of your class here.
@@ -47,16 +49,16 @@ public class RunStockDataProcessor
               .map(LocalDateStatistics::new)
               .map(StockDataSource::new)
               .map(StockDataSource::process)
-              .filter(p->p.returnResults().contains("count=12"))
+              .filter(processor->processor.returnResults().contains("count=12"))
 //              .map(p->p.getStockSymbol())
-              .forEach(t -> {
+              .forEach(processor -> {
                     try
                     {
                         synchronized(o) {
-                        writer.write(t.getStockSymbol());
-                        writer.newLine();
-                        writer.write(t.returnResults());
-                        writer.newLine();
+                            writer.write(processor.getStockSymbol());
+                            writer.newLine();
+                            writer.write(processor.returnResults());
+                            writer.newLine();
                         }
                     }
                     catch (IOException e)

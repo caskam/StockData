@@ -1,8 +1,10 @@
+package processors;
 
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import stockdata.StockData;
 
 /**
  *  Write a one-sentence summary of your class here.
