@@ -1,12 +1,10 @@
 package processors;
 
 import com.google.common.math.StatsAccumulator;
-import java.nio.file.Path;
 import java.time.LocalDate;
-import java.util.function.Function;
 import java.util.stream.Stream;
 import stockdata.StockData;
-import stockdata.StockDataProcessorInterface;
+import stockdata.StockDataProcessor;
 
 /**
  *  Write a one-sentence summary of your class here.
@@ -16,7 +14,7 @@ import stockdata.StockDataProcessorInterface;
  *  @author Karl Nicholas
  *  @version Jan 19, 2017
  */
-public class LocalDateStatistics implements StockDataProcessorInterface {
+public class LocalDateStatistics implements StockDataProcessor {
     private String stockSymbol;
     private LocalDateStockData localDateStockData;
     private StatsAccumulator volumeStats;
@@ -25,10 +23,10 @@ public class LocalDateStatistics implements StockDataProcessorInterface {
 
     /**
      * Create a new LocalDateStockDataList object.
-     * @param getGtockSymbol function for getting symbol found on exchange
+     * @param stockSymbol function for getting symbol found on exchange
      */
-    public LocalDateStatistics(Function<Path, String> getGtockSymbol) {
-        stockSymbol = getStockSymbol();
+    public LocalDateStatistics(String stockSymbol) {
+        this.stockSymbol = stockSymbol;
         volumeStats = new StatsAccumulator();
         highStats = new StatsAccumulator();
         lowStats = new StatsAccumulator();
@@ -48,8 +46,9 @@ public class LocalDateStatistics implements StockDataProcessorInterface {
         localDateStockData.add(stockData);
     }
 
-    public void process(Stream<StockData> stockDataStream) {
+    public StockDataProcessor process(Stream<StockData> stockDataStream) {
         stockDataStream.forEachOrdered(sd->add(sd));
+        return this;
     }
 
     /**

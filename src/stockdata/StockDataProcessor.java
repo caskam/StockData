@@ -10,7 +10,7 @@ import java.util.stream.Stream;
  *  @author Karl Nicholas
  *  @version 2017-02-01
  */
-public interface StockDataProcessorInterface {
+public interface StockDataProcessor {
     /**
      * Place a description of your method here.
      * @return StockSymbol
@@ -24,5 +24,5 @@ public interface StockDataProcessorInterface {
     /**
      *
      */
-    public void process(Stream<StockData> stockDataStream);
+    public StockDataProcessor process(Stream<StockData> stockDataStream);
 }

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Stream;
 import stockdata.StockData;
-import stockdata.StockDataProcessorInterface;
+import stockdata.StockDataProcessor;
 
 /**
  *  Write a one-sentence summary of your class here.
@@ -18,7 +18,7 @@ import stockdata.StockDataProcessorInterface;
  *  @author Karl Nicholas
  *  @version Jan 19, 2017
  */
-public class LocalDateStockDataList implements StockDataProcessorInterface {
+public class LocalDateStockDataList implements StockDataProcessor {
     private String stockSymbol;
     private List<LocalDateStockData> localDateStockDataList;
 
@@ -26,8 +26,8 @@ public class LocalDateStockDataList implements StockDataProcessorInterface {
      * Create a new LocalDateStockDataList object.
      * @param getStockSymbol found on exchange
      */
-    public LocalDateStockDataList(Function<Path, String> getStockSymbol) {
-        stockSymbol = getStockSymbol();
+    public LocalDateStockDataList(String stockSymbol) {
+        this.stockSymbol = stockSymbol;
         localDateStockDataList = new ArrayList<LocalDateStockData>();
     }
     public void add(StockData stockData)
@@ -44,9 +44,10 @@ public class LocalDateStockDataList implements StockDataProcessorInterface {
         localDateStockData.add(stockData);
     }
 
-    public void process(Stream<StockData> stockDataStream)
+    public StockDataProcessor process(Stream<StockData> stockDataStream)
     {
         stockDataStream.forEachOrdered(sd->add(sd));
+        return this;
     }
     /**
      * Place a description of your method here.

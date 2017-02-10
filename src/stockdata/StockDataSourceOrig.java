@@ -20,20 +20,20 @@ public class StockDataSourceOrig {
     private static final String sourceDirectory = "C:/Users/quix0/Downloads/5_us_txt/data/5 min/us/";
     private static final String[] nyseSourceExchanges = {"nyse stocks/1/"};
     private static final String datafileExtension = ".us.txt";
-    private StockDataProcessorInterface processor;
+    private StockDataProcessor processor;
 
     /**
      * Create a new ProcessStock object.
      * @param processor StockDataProcessorInterface processor
      */
-    public StockDataSourceOrig(StockDataProcessorInterface processor) {
+    public StockDataSourceOrig(StockDataProcessor processor) {
         this.processor = processor;
     }
     /**
      * Place a description of your method here.
      * @return StockDataListener listener
      */
-    public StockDataProcessorInterface process()
+    public StockDataProcessor process()
 //    public Listener anew LocalDateStatistics(getStockSymbol))  pply(Listener listener)
     {
         return null;
