@@ -1,9 +1,12 @@
 package processors;
 
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Stream;
 import stockdata.StockData;
 import stockdata.StockDataProcessorInterface;
 
@@ -21,17 +24,13 @@ public class LocalDateStockDataList implements StockDataProcessorInterface {
 
     /**
      * Create a new LocalDateStockDataList object.
-     * @param stockSymbol found on exchange
+     * @param getStockSymbol found on exchange
      */
-    public LocalDateStockDataList(String stockSymbol) {
-        this.stockSymbol = stockSymbol;
+    public LocalDateStockDataList(Function<Path, String> getStockSymbol) {
+        stockSymbol = getStockSymbol();
         localDateStockDataList = new ArrayList<LocalDateStockData>();
     }
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void accept(StockData stockData)
+    public void add(StockData stockData)
     {
         LocalDate localDate = stockData.getOpenDateTime().toLocalDate();
         int index = Collections.binarySearch(localDateStockDataList, localDate );
@@ -45,6 +44,10 @@ public class LocalDateStockDataList implements StockDataProcessorInterface {
         localDateStockData.add(stockData);
     }
 
+    public void process(Stream<StockData> stockDataStream)
+    {
+        stockDataStream.forEachOrdered(sd->add(sd));
+    }
     /**
      * Place a description of your method here.
      * @return true if sorted

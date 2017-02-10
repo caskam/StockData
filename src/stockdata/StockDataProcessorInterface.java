@@ -1,5 +1,6 @@
 package stockdata;
 import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 /**
  *  A StockDatea processor is a {@link Consumer} of {@link StockData}.
@@ -9,7 +10,7 @@ import java.util.function.Consumer;
  *  @author Karl Nicholas
  *  @version 2017-02-01
  */
-public interface StockDataProcessorInterface extends Consumer<StockData> {
+public interface StockDataProcessorInterface {
     /**
      * Place a description of your method here.
      * @return StockSymbol
@@ -20,4 +21,8 @@ public interface StockDataProcessorInterface extends Consumer<StockData> {
      * @return results
      */
     public String returnResults();
+    /**
+     *
+     */
+    public void process(Stream<StockData> stockDataStream);
 }

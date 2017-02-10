@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
+import processors.LocalDateStatistics;
 
 /**
  * Read 5 minute tick stock data from http://stooq.com/db/d/?b=5_us_txt
@@ -15,7 +16,7 @@ import java.util.stream.Stream;
  * @author Karl Nicholas
  * @version Jan 19, 2017
  */
-public class StockDataSource {
+public class StockDataSourceOrig {
     private static final String sourceDirectory = "C:/Users/quix0/Downloads/5_us_txt/data/5 min/us/";
     private static final String[] nyseSourceExchanges = {"nyse stocks/1/"};
     private static final String datafileExtension = ".us.txt";
@@ -25,7 +26,7 @@ public class StockDataSource {
      * Create a new ProcessStock object.
      * @param processor StockDataProcessorInterface processor
      */
-    public StockDataSource(StockDataProcessorInterface processor) {
+    public StockDataSourceOrig(StockDataProcessorInterface processor) {
         this.processor = processor;
     }
     /**
@@ -33,8 +34,10 @@ public class StockDataSource {
      * @return StockDataListener listener
      */
     public StockDataProcessorInterface process()
-//    public Listener apply(Listener listener)
+//    public Listener anew LocalDateStatistics(getStockSymbol))  pply(Listener listener)
     {
+        return null;
+/*
 //        StockDataListener listener = new listenerImpl();
 //        listener.setStockSymbol(stockSymbol);
         EXCHANGES exchange = EXCHANGES.NYSE;
@@ -62,11 +65,12 @@ public class StockDataSource {
             lines
             .skip(1)
             .map(StockData::new)
-            .forEachOrdered(processor);
+            .forEachOrdered(sd->processor.add(sd));
             return processor;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+*/
     }
 
     /**
