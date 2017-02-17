@@ -7,8 +7,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import processors.LocalDateStatistics;
+import results.StatResults;
 import stockdata.StockData;
 import stockdata.StockDataProcessor;
 
@@ -58,7 +60,11 @@ public class RunStockDataProcessor
                         return processor;
                     } catch (IOException e) { throw new RuntimeException(e); }
                 })
-                .filter(results -> results.returnResults().contains("count=24"))
+//                .filter(results -> results.returnResults().contains("count=24"))
+                .map(results->(StatResults)results.returnResults())
+                .collect(Collectors.groupingBy(r->r.getVolumeStats().count(), Collectors.counting()))
+                .forEach((k, v)->System.out.println(k +":"+v));
+/*
                 .forEach(results -> {
                     try {
                         synchronized (o) {
@@ -69,6 +75,7 @@ public class RunStockDataProcessor
                         }
                     } catch (IOException e) { throw new RuntimeException(e); }
                 });
+*/
             } catch (IOException e) { throw new RuntimeException(e); }
         } catch (IOException e) { throw new RuntimeException(e); }
     }

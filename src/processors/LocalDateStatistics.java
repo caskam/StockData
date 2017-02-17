@@ -3,8 +3,10 @@ package processors;
 import com.google.common.math.StatsAccumulator;
 import java.time.LocalDate;
 import java.util.stream.Stream;
+import results.StatResults;
 import stockdata.StockData;
 import stockdata.StockDataProcessor;
+import stockdata.StockResults;
 
 /**
  *  Write a one-sentence summary of your class here.
@@ -63,12 +65,13 @@ public class LocalDateStatistics implements StockDataProcessor {
      * {@inheritDoc}
      */
     @Override
-    public String returnResults()
+    public StockResults returnResults()
     {
-        return String.format("\nVolume %s\n  High %s\n   Low %s",
-            volumeStats.snapshot().toString(),
-            highStats.snapshot().toString(),
-            lowStats.snapshot().toString()
+        return new StatResults(
+            stockSymbol,
+            volumeStats.snapshot(),
+            highStats.snapshot(),
+            lowStats.snapshot()
         );
     }
 }

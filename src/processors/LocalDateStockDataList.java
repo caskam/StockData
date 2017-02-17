@@ -7,8 +7,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Stream;
+import results.StringResults;
 import stockdata.StockData;
 import stockdata.StockDataProcessor;
+import stockdata.StockResults;
 
 /**
  *  Write a one-sentence summary of your class here.
@@ -83,8 +85,8 @@ public class LocalDateStockDataList implements StockDataProcessor {
      * {@inheritDoc}
      */
     @Override
-    public String returnResults()
+    public StockResults returnResults()
     {
-        return localDateStockDataList.toString();
+        return new StringResults( stockSymbol, localDateStockDataList.toString() );
     }
 }

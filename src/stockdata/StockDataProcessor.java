@@ -20,7 +20,7 @@ public interface StockDataProcessor {
      * Place a description of your method here.
      * @return results
      */
-    public String returnResults();
+    public StockResults returnResults();
     /**
      *
      */
